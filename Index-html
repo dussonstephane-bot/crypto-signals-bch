@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crypto Signals BCH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: Arial; text-align:center; margin-top:50px;">
+
+<h1>📈 BCH Signal</h1>
+<p id="price">Chargement...</p>
+<p id="signal"></p>
+
+<script>
+async function getPrice() {
+  const res = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=BCHUSDT");
+  const data = await res.json();
+  const price = parseFloat(data.price);
+
+  document.getElementById("price").innerText = "Prix BCH : " + price;
+
+  if (price < 200) {
+    document.getElementById("signal").innerText = "🟢 ACHETER";
+  } else if (price > 300) {
+    document.getElementById("signal").innerText = "🔴 VENDRE";
+  } else {
+    document.getElementById("signal").innerText = "⚪ ATTENDRE";
+  }
+}
+
+getPrice();
+</script>
+
+</body>
+</html>
